@@ -1,18 +1,18 @@
 <?php
 
-$listProdutos  = '';
+$listProdutos = '';
 
 foreach ($produtos as $item) {
 
-  if (empty($item->foto)) {
+    if (empty($item->foto)) {
 
-    $foto = 'imgs/sem.jpg';
-  } else {
+        $foto = 'imgs/sem.jpg';
+    } else {
 
-    $foto = $item->foto;
-  }
+        $foto = $item->foto;
+    }
 
-  $listProdutos .= '
+    $listProdutos .= '
 
                 <tr>
                   <td>
@@ -62,8 +62,8 @@ $paginacao = '';
 $paginas = $pagination->getPages();
 
 foreach ($paginas as $key => $pagina) {
-  $class = $pagina['atual'] ? 'btn-primary' : 'btn-dark';
-  $paginacao .= '<li class="page-item"><a href="?pagina=' . $pagina['pagina'] . '&' . $gets . '">
+    $class = $pagina['atual'] ? 'btn-primary' : 'btn-dark';
+    $paginacao .= '<li class="page-item"><a href="?pagina=' . $pagina['pagina'] . '&' . $gets . '">
 
                   <button type="button" class=" btn ' . $class . '">' . $pagina['pagina'] . '</button>
                   &nbsp; </a></li>';
@@ -79,12 +79,12 @@ foreach ($paginas as $key => $pagina) {
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0"><?= TITLE ?></h1>
+          <h1 class="m-0"><?=TITLE?></h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active"><?= BRAND ?></li>
+            <li class="breadcrumb-item active"><?=BRAND?></li>
           </ol>
         </div>
       </div>
@@ -101,11 +101,11 @@ foreach ($paginas as $key => $pagina) {
         <div class="col-lg-8 col-6">
           <div class="card card-dark">
             <div class="card-header">
-              <h3 class="card-title">Atendente: &nbsp; <span style="text-transform: uppercase; color:yellow"><?= $usuario ?></span></h3>
+              <h3 class="card-title">Atendente: &nbsp; <span style="text-transform: uppercase; color:yellow"><?=$usuario?></span></h3>
 
               <div class="card-tools">
                 <ul class="pagination pagination-sm float-right">
-                  <?= $paginacao ?>
+                  <?=$paginacao?>
                 </ul>
               </div>
             </div>
@@ -153,7 +153,7 @@ foreach ($paginas as $key => $pagina) {
                       <th>AÇÃO</th>
                     </thead>
                     <tbody>
-                      <?= $listProdutos ?>
+                      <?=$listProdutos?>
                     </tbody>
                   </table>
                 </div>
@@ -172,10 +172,11 @@ foreach ($paginas as $key => $pagina) {
         <div class="col-lg-4 col-6">
 
         <form action="finalizar-venda.php" method="post">
-          <input type="hidden" name="troco" value="<?= $troco ?>">
+          <input type="hidden" name="troco" value="<?=$troco?>">
+          <input type="hidden" name="valor_recebido" value="<?=$val_recebido?>">
           <div class="card card-primary">
             <div class="card-header">
-              <h1 class="card-title"><span style="font-size: xx-large; font-weight:600; color:FFF"> TROCO: R$&nbsp;<?= number_format($troco,"2",",",".") ?>
+              <h1 class="card-title"><span style="font-size: xx-large; font-weight:600; color:FFF"> TROCO: R$&nbsp;<?=number_format($troco, "2", ",", ".")?>
 
                 </span></h1>
 
@@ -193,27 +194,33 @@ foreach ($paginas as $key => $pagina) {
             <div class="card-body">
 
                   <div class="col-12">
-                  <div class="alert alert-info alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <h5><i class="icon fas fa-ban"></i> Atenção!</h5>
-                  Este recibo serve para o cliente como forma de garantia em peças e serviços feita pelo cliente em nossa loja.. .
-                </div>
-                 
-                  </div>
-                  
-                  <div class="col-12">
-
-                    <button type="submit" class="btn btn-warning btn-lg btn-block" style="margin-top: 10px;">IMPRIMIR RECIBO</button>
+                      <div class="alert alert-info alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h5><i class="icon fas fa-ban"></i> Atenção!</h5>
+                        Este recibo serve para o cliente como forma de garantia em peças e serviços feita pelo cliente em nossa loja.. .
+                      </div>
 
                   </div>
 
-                  
-                </div>
-                
-                
-              </div>
-              
-              
+            </div>
+
+            <div class="card-body">
+
+            <div class="row">
+            
+            <div class="col-6">
+            <a href="finalizar-orcamento.php" class="btn btn-danger btn-lg btn-block"  target="_blank" rel="noopener noreferrer">ORÇAMENTO</a>
+            </div>
+            <div class="col-6">
+           
+            <a href="finalizar-venda.php" class="btn btn-warning btn-lg btn-block"  target="_blank" rel="noopener noreferrer">RECIBO</a>
+            </div>
+            </div>
+           
+
+            </div>
+
+
             </div>
           </form>
         <!-- FIM -->

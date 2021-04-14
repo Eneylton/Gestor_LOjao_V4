@@ -269,6 +269,8 @@ foreach ($_SESSION['carrinho'] as $id => $qtd) {
   
               array(
                   'nome'         => $nome,
+                  'codigo'       => $item->codigo,
+                  'barra'        => $item->barra,
                   'qtd'          => $qtd,
                   'valor_venda'  => $valor_venda,
                   'subtotal'     => $sub,

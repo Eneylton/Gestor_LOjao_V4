@@ -9,6 +9,8 @@ use App\Db\Pagination;
 use App\Entidy\Produto;
 use   \App\Session\Login;
 
+
+
 $alertaLogin  = '';
 $alertaCadastro = '';
 
@@ -18,18 +20,32 @@ $usuario = $usuariologado['id'];
 
 Login::requireLogin();
 
+
 $troco = 0;
 if(isset($_POST['valor_receber'],$_POST['form_pagamento'])){
-    $val_recebido   = $_POST['valor_receber'];
-    $total_absoluto = $_POST['total_absoluto'];
-    $troco =  ($val_recebido - $total_absoluto);
+  $_SESSION['forma-pagamento'] = array();
 
-    if($troco < 0){
+    $form_pagamento   = $_POST['form_pagamento'];
+    $val_recebido     = $_POST['valor_receber'];
+    $total_absoluto   = $_POST['total_absoluto'];
+    $troco            = ($val_recebido - $total_absoluto);
 
+    array_push(
+      $_SESSION['forma-pagamento'],
+
+      array(
+
+          'troco'                      => $troco,
+          'valor_recebido'             => $val_recebido,
+          'forma_pagamento'            => $form_pagamento
+          
+      )
+  );
 
     }
 
-    }
+   
+
 
  // LISTAR PRODUTOS
 $codigo = filter_input(INPUT_GET, 'buscar', FILTER_SANITIZE_STRING);

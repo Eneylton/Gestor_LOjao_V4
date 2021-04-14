@@ -209,7 +209,6 @@ if (count($_SESSION['carrinho_compra']) == 0) {
                 'codigo'             => $item->codigo,
                 'barra'              => $item->barra,
                 'qtd'                => $qtd,
-                'qtd'                => $qtd,
                 'valor_compra'       => $item->valor_compra,
                 'subtotal'           => $sub,
                 'produtos_id'        => $id

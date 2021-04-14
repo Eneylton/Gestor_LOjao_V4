@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14-Abr-2021 às 04:07
+-- Tempo de geração: 14-Abr-2021 às 22:38
 -- Versão do servidor: 10.4.17-MariaDB
 -- versão do PHP: 7.4.14
 
@@ -20,6 +20,23 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `db_gestor2`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `caixa`
+--
+
+CREATE TABLE `caixa` (
+  `id` int(11) NOT NULL,
+  `data` timestamp NULL DEFAULT current_timestamp(),
+  `total_obra` decimal(10,2) DEFAULT NULL,
+  `total_produto` decimal(10,2) DEFAULT NULL,
+  `total_servico` decimal(10,2) DEFAULT NULL,
+  `usuarios_id` int(11) NOT NULL,
+  `clientes_id` int(11) NOT NULL,
+  `mecanicos_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -298,10 +315,14 @@ CREATE TABLE `ordem_servicos` (
 --
 
 INSERT INTO `ordem_servicos` (`id`, `data`, `clientes_id`, `mecanicos_id`, `servicos_id`, `mao_obra`, `obs`) VALUES
-(67, '2021-04-13 14:24:35', 2, 2, 1, '200.00', 'Teste ce Cadastro'),
-(68, '2021-04-13 14:24:35', 2, 2, 7, '200.00', 'Teste ce Cadastro'),
-(69, '2021-04-13 19:28:56', 2, 1, 1, '150.00', 'Carro vaelho'),
-(70, '2021-04-13 19:28:57', 2, 1, 3, '150.00', 'Carro vaelho');
+(93, '2021-04-14 19:54:55', 2, 2, 1, '152.36', 'Todos'),
+(94, '2021-04-14 19:54:55', 2, 2, 2, '152.36', 'Todos'),
+(95, '2021-04-14 20:26:17', 1, 1, 2, '300.00', 'Tdos'),
+(96, '2021-04-14 20:26:17', 1, 1, 6, '300.00', 'Tdos'),
+(97, '2021-04-14 20:26:55', 4, 2, 6, '200.00', 'OOKK'),
+(98, '2021-04-14 20:26:55', 4, 2, 7, '200.00', 'OOKK'),
+(102, '2021-04-14 20:36:49', 1, 1, 3, '300.00', 'OOK'),
+(103, '2021-04-14 20:36:49', 1, 1, 7, '300.00', 'OOK');
 
 -- --------------------------------------------------------
 
@@ -1546,19 +1567,38 @@ INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`) VALUES
 CREATE TABLE `vendas` (
   `id` int(11) NOT NULL,
   `data` timestamp NULL DEFAULT current_timestamp(),
-  `total_produto` decimal(10,2) DEFAULT NULL,
-  `total_servicos` decimal(10,2) DEFAULT NULL,
-  `total_obra` decimal(10,2) DEFAULT NULL,
-  `valor_recebido` decimal(10,2) DEFAULT NULL,
+  `nome` varchar(255) DEFAULT NULL,
+  `codigo` int(11) DEFAULT NULL,
+  `barra` int(11) DEFAULT NULL,
+  `qtd` int(11) DEFAULT NULL,
+  `valor_venda` decimal(10,2) DEFAULT NULL,
+  `subtotal` decimal(10,2) DEFAULT NULL,
   `usuarios_id` int(11) NOT NULL,
   `clientes_id` int(11) NOT NULL,
   `mecanicos_id` int(11) NOT NULL,
-  `forma_pagamento_id` int(11) NOT NULL
+  `produtos_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `vendas`
+--
+
+INSERT INTO `vendas` (`id`, `data`, `nome`, `codigo`, `barra`, `qtd`, `valor_venda`, `subtotal`, `usuarios_id`, `clientes_id`, `mecanicos_id`, `produtos_id`) VALUES
+(3, '2021-04-14 20:37:15', 'ABRACADEIRA NYLON BRANCA 283X4.80MM', 770886, 2147483647, 6, '84.69', '508.14', 7, 1, 1, 1),
+(4, '2021-04-14 20:37:21', 'ABRACADEIRA NYLON BRANCA 400X4.80MM', 770885, 2147483647, 7, '150.87', '1056.09', 7, 1, 1, 2);
 
 --
 -- Índices para tabelas despejadas
 --
+
+--
+-- Índices para tabela `caixa`
+--
+ALTER TABLE `caixa`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_caixa_usuarios1_idx` (`usuarios_id`),
+  ADD KEY `fk_caixa_clientes1_idx` (`clientes_id`),
+  ADD KEY `fk_caixa_mecanicos1_idx` (`mecanicos_id`);
 
 --
 -- Índices para tabela `categorias`
@@ -1663,11 +1703,17 @@ ALTER TABLE `vendas`
   ADD KEY `fk_orcamento_final_usuarios1_idx` (`usuarios_id`),
   ADD KEY `fk_orcamento_final_clientes1_idx` (`clientes_id`),
   ADD KEY `fk_orcamento_final_mecanicos1_idx` (`mecanicos_id`),
-  ADD KEY `fk_vendas_forma_pagamento1_idx` (`forma_pagamento_id`);
+  ADD KEY `fk_vendas_produtos1_idx` (`produtos_id`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `caixa`
+--
+ALTER TABLE `caixa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `categorias`
@@ -1721,7 +1767,7 @@ ALTER TABLE `mecanicos`
 -- AUTO_INCREMENT de tabela `ordem_servicos`
 --
 ALTER TABLE `ordem_servicos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT de tabela `pedidos`
@@ -1751,11 +1797,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restrições para despejos de tabelas
 --
+
+--
+-- Limitadores para a tabela `caixa`
+--
+ALTER TABLE `caixa`
+  ADD CONSTRAINT `fk_caixa_clientes1` FOREIGN KEY (`clientes_id`) REFERENCES `clientes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_caixa_mecanicos1` FOREIGN KEY (`mecanicos_id`) REFERENCES `mecanicos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_caixa_usuarios1` FOREIGN KEY (`usuarios_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `clientes`
@@ -1814,7 +1868,7 @@ ALTER TABLE `vendas`
   ADD CONSTRAINT `fk_orcamento_final_clientes1` FOREIGN KEY (`clientes_id`) REFERENCES `clientes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_orcamento_final_mecanicos1` FOREIGN KEY (`mecanicos_id`) REFERENCES `mecanicos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_orcamento_final_usuarios1` FOREIGN KEY (`usuarios_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_vendas_forma_pagamento1` FOREIGN KEY (`forma_pagamento_id`) REFERENCES `forma_pagamento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_vendas_produtos1` FOREIGN KEY (`produtos_id`) REFERENCES `produtos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

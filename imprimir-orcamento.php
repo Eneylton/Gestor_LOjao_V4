@@ -177,7 +177,7 @@ $total_geral = $total_serv + $total_prod + $mao_obra ;
         }
     </style>
 
-    <title>Recibo</title>
+    <title>Orçamento</title>
 </head>
 
 <body>
@@ -201,7 +201,7 @@ $total_geral = $total_serv + $total_prod + $mao_obra ;
         <tbody>
             <tr style="background-color: #fff; color:#000">
                 <td style="border:1px solid #fff; text-align:center;font-size:11px">
-                    ORDEM DE SERVIÇOS
+                    ORÇAMENTO DE SERVIÇOS
                 </td>
             </tr>
         </tbody>

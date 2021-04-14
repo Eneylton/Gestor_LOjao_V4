@@ -4,10 +4,9 @@ require __DIR__.'/vendor/autoload.php';
 
 use   \App\Entidy\Produto;
 use   \App\Entidy\Cliente;
-use   \App\Entidy\Servico;
 use   \App\Entidy\Mecanico;
-use   \App\Entidy\Marca;
 use   \App\Db\Pagination;
+use   \App\Entidy\Venda;
 use   \App\Session\Login;
 
 
@@ -20,6 +19,7 @@ Login::requireLogin();
 $usuariologado = Login::getUsuarioLogado();
 
 $usuario = $usuariologado['nome'];
+$usuario_id = $usuariologado['id'];
 
 // CLIENTE // SERVIÇOS
 
@@ -56,10 +56,13 @@ $total_produtos = '0';
 if(isset($_SESSION['dados-venda'])){
   foreach ($_SESSION['dados-venda'] as $item) {
 
-    $produto = $item['nome'];
-    $qtd     = $item['qtd'];
-    $uni     = $item['valor_venda'];
-    $sub     = $item['subtotal'];
+    $produto         = $item['nome'];
+    $codigo_prod     = $item['codigo'];
+    $barra           = $item['barra'];
+    $produtos_id     = $item['produtos_id'];
+    $qtd             = $item['qtd'];
+    $uni             = $item['valor_venda'];
+    $sub             = $item['subtotal'];
     $total_produtos += $sub; 
 
     $result .= '
@@ -69,6 +72,20 @@ if(isset($_SESSION['dados-venda'])){
     <td> R$ '.number_format($sub,"2",",",".").' </td>
     </tr>
     ';
+
+
+  $venda = New Venda;
+  $venda->nome             =  $produto;
+  $venda->codigo           =  $codigo_prod;
+  $venda->barra            =  $barra;
+  $venda->qtd              =  $qtd;
+  $venda->valor_venda      =  $uni;
+  $venda->subtotal         =  $sub;
+  $venda->usuarios_id      =  $usuario_id;
+  $venda->clientes_id      =  $cliente_id;
+  $venda->mecanicos_id     =  $mec_id;
+  $venda->produtos_id      =  $produtos_id;
+  $venda->cadastar();
 
   }
 
