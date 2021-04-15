@@ -373,7 +373,7 @@ foreach ($_SESSION['carrinho'] as $id => $qtd) {
                   </div>
                   
                   <div class="col-6">
-                    <input type="text" class="form-control" placeholder="Mão de Obra" name="mao_obra" required>
+                    <input type="text" maxlength="100000" class="form-control" id="dinheiro" placeholder="Mão de Obra" name="mao_obra" required>
                    </div>
 
                    <div class="col-12">

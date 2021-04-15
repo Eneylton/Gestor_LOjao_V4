@@ -97,11 +97,21 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 <script src="assets/dist/js/adminlte.js"></script>
 <script src="assets/dist/js/demo.js"></script>
 <script src="assets/dist/js/pages/dashboard.js"></script>
+<script src="assets/dist/js/jquery.mask.js"></script>
 <script src="assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
 <script src="assets/plugins/bootstrap-slider/bootstrap-slider.min.js"></script>
 <script src="assets/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
 <script src="assets/plugins/filterizr/jquery.filterizr.min.js"></script>
 <script src="assets/plugins/select2/js/select2.full.min.js"></script>
+
+<script type="text/javascript"> 
+$(document).ready(function(){
+   $("#cpf").mask("000.000.000-00")
+   $("#telefone").mask("(00) 0000-0000")
+   $("#dinheiro").mask("999.999.990,00", {reverse: true})
+})
+
+</script>
 
 
 

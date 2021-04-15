@@ -234,7 +234,7 @@ foreach ($paginas as $key => $pagina) {
                   </table>
                   
                   <div class="col-6">
-                   <input type="text" name="valor_receber" class="form-control" placeholder="R$ valor a receber " required>
+                   <input type="text" maxlength="100000" name="valor_receber" class="form-control" placeholder="R$ valor a receber " id="dinheiro" required>
                   </div>
                   <div class="col-6">
                     <select name="form_pagamento" id="" class="form-control" required>

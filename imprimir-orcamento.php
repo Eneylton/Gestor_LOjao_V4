@@ -4,6 +4,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 use App\Entidy\Cliente;
 use App\Entidy\Mecanico;
+use App\Entidy\Orcamento;
 use App\Entidy\Ordem;
 use \App\Session\Login;
 
@@ -21,7 +22,8 @@ if(isset($_SESSION['forma-pagamento'])){
 
 $usuariologado = Login::getUsuarioLogado();
 
-$usuario = $usuariologado['nome'];
+$usuario    = $usuariologado['nome'];
+$usuario_id = $usuariologado['id'];
 
 $total_geral = 0;
 
@@ -67,23 +69,44 @@ foreach ($ordem_servicos as $value) {
 $result_prod = '';
 $total_prod = 0;
 foreach ($_SESSION['dados-venda'] as $item) {
-
-    $nome            = $item['nome'];
+    
+    $produto         = $item['nome'];
+    $codigo_prod     = $item['codigo'];
+    $barra           = $item['barra'];
+    $produtos_id     = $item['produtos_id'];
     $qtd             = $item['qtd'];
-    $valor_venda     = $item['valor_venda'];
-    $subtotal        = $item['subtotal'];
+    $uni             = $item['valor_venda'];
+    $sub             = $item['subtotal'];
+    
 
     $result_prod .= '
         <tr>
-        <td>' . $nome . '</td>
+        <td>' . $produto . '</td>
         <td>' . $qtd . '</td>
-        <td> R$ ' . number_format($valor_venda, "2", ",", ".") . '</td>
-        <td style="text-align: left;"> R$ ' . number_format($subtotal, "2", ",", ".") . '</td>
+        <td> R$ ' . number_format($uni, "2", ",", ".") . '</td>
+        <td style="text-align: left;"> R$ ' . number_format($sub, "2", ",", ".") . '</td>
         </tr>
 
         ';
 
-        $total_prod += $subtotal;
+        $total_prod += $sub;
+
+       
+        $orcamento = New Orcamento;
+        $orcamento->nome               =  $produto;
+        $orcamento->codigo             =  $codigo_prod;
+        $orcamento->barra              =  $barra;
+        $orcamento->qtd                =  $qtd;
+        $orcamento->valor_venda        =  $uni;
+        $orcamento->subtotal           =  $sub;
+        $orcamento->forma_pagamento    =  $forma_pagamento;
+        $orcamento->usuarios_id        =  $usuario_id;
+        $orcamento->clientes_id        =  $cliente_id;
+        $orcamento->mecanicos_id       =  $mecanico_id;
+        $orcamento->produtos_id        =  $produtos_id;
+        $orcamento->cadastar();
+
+        
 }
 
 $total_geral = $total_serv + $total_prod + $mao_obra ;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14-Abr-2021 às 22:38
+-- Tempo de geração: 15-Abr-2021 às 21:41
 -- Versão do servidor: 10.4.17-MariaDB
 -- versão do PHP: 7.4.14
 
@@ -91,27 +91,27 @@ CREATE TABLE `clientes` (
   `telefone` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `placa` varchar(100) DEFAULT NULL,
+  `veiculo` varchar(225) DEFAULT NULL,
   `usuarios_id` int(11) NOT NULL,
-  `marcas_id` int(11) NOT NULL,
-  `veiculo` varchar(225) DEFAULT NULL
+  `marcas_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `clientes`
 --
 
-INSERT INTO `clientes` (`id`, `nome`, `telefone`, `email`, `placa`, `usuarios_id`, `marcas_id`, `veiculo`) VALUES
-(1, 'Eneylton Barros ', '98 991581962', 'eneylton@hotmail.com', 'NHO-5566', 13, 1, 'Gol G5 1.6 2002'),
-(2, 'Magarette Menezes', '98991581962', 'eneylton@hotmail.com', 'NHO-8596', 4, 1, 'Nissan Frontier 2005'),
-(4, 'Lojao Carro', '98991581962', 'eneylton@hotmail.com', 'NHO-8596', 4, 1, 'Corolla 2006'),
-(5, 'Livia Barros', '9891581965', 'eneylton@hotmail.com', 'NHO-8596', 4, 1, 'Fiat Gran Seinne 1.4'),
-(6, 'Davi', '989852222', 'davi@hotmail.com', 'HPA-19655', 4, 1, 'Ford Fista ROCAM'),
-(7, 'Lojao Carro', '98991581962', 'eneylton@hotmail.com', 'NHO-8596', 4, 1, 'Vectra 2.0 99'),
-(9, 'Lojao Carro', '98991581962', 'eneylton@hotmail.com', 'NHO-8596', 4, 1, 'Novo Uno 2005'),
-(10, 'Lojao Carro', '98991581962', 'eneylton@hotmail.com', 'NHO-8596', 4, 1, 'Corsa 1.0'),
-(11, 'Carolinne ', '98 954422', 'eneylton@hotmail.com', 'HPA-19655', 4, 2, 'New Fiesta 2.0'),
-(12, 'Eneylton Barros', '98991581962', 'eneylton@hotmail.com', 'NHO-6789', 7, 2, NULL),
-(13, 'Jamilla Barra', '98991581962', 'eneylton@hotmail.com', 'NHO-6790', 7, 2, NULL);
+INSERT INTO `clientes` (`id`, `nome`, `telefone`, `email`, `placa`, `veiculo`, `usuarios_id`, `marcas_id`) VALUES
+(1, 'Eneylton Barros ', '98 991581962', 'eneylton@hotmail.com', 'NHO-5566', 'Gol G5 1.6 2002', 13, 1),
+(2, 'Magarette Menezes', '98991581962', 'eneylton@hotmail.com', 'NHO-8596', 'Nissan Frontier 2005', 4, 1),
+(4, 'Lojao Carro', '98991581962', 'eneylton@hotmail.com', 'NHO-8596', 'Corolla 2006', 4, 1),
+(5, 'Livia Barros', '9891581965', 'eneylton@hotmail.com', 'NHO-8596', 'Fiat Gran Seinne 1.4', 4, 1),
+(6, 'Davi', '989852222', 'davi@hotmail.com', 'HPA-19655', 'Ford Fista ROCAM', 4, 1),
+(7, 'Lojao Carro', '98991581962', 'eneylton@hotmail.com', 'NHO-8596', 'Vectra 2.0 99', 4, 1),
+(9, 'Lojao Carro', '98991581962', 'eneylton@hotmail.com', 'NHO-8596', 'Novo Uno 2005', 4, 1),
+(10, 'Lojao Carro', '98991581962', 'eneylton@hotmail.com', 'NHO-8596', 'Corsa 1.0', 4, 1),
+(11, 'Carolinne ', '98 954422', 'eneylton@hotmail.com', 'HPA-19655', 'New Fiesta 2.0', 4, 2),
+(12, 'Eneylton Barros', '98991581962', 'eneylton@hotmail.com', 'NHO-6789', NULL, 7, 2),
+(13, 'Jamilla Barra', '98991581962', 'eneylton@hotmail.com', 'NHO-6790', NULL, 7, 2);
 
 -- --------------------------------------------------------
 
@@ -297,6 +297,36 @@ INSERT INTO `mecanicos` (`id`, `nome`, `telefone`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `orcamentos`
+--
+
+CREATE TABLE `orcamentos` (
+  `id` int(11) NOT NULL,
+  `data` timestamp NULL DEFAULT current_timestamp(),
+  `nome` varchar(255) DEFAULT NULL,
+  `codigo` int(11) DEFAULT NULL,
+  `barra` int(11) DEFAULT NULL,
+  `qtd` int(11) DEFAULT NULL,
+  `valor_venda` decimal(10,2) DEFAULT NULL,
+  `subtotal` decimal(10,2) DEFAULT NULL,
+  `usuarios_id` int(11) NOT NULL,
+  `clientes_id` int(11) NOT NULL,
+  `mecanicos_id` int(11) NOT NULL,
+  `produtos_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `orcamentos`
+--
+
+INSERT INTO `orcamentos` (`id`, `data`, `nome`, `codigo`, `barra`, `qtd`, `valor_venda`, `subtotal`, `usuarios_id`, `clientes_id`, `mecanicos_id`, `produtos_id`) VALUES
+(5, '2021-04-15 12:40:28', 'BALANCIM S10 2012 / 12625214 GM', 771556, 0, 2, '5.00', '10.00', 4, 1, 2, 151),
+(6, '2021-04-15 13:14:54', 'BALANCIM S10 2012 / 12625214 GM', 771556, 0, 2, '5.00', '10.00', 4, 1, 2, 151),
+(7, '2021-04-15 19:38:03', 'ABRACADEIRA NYLON BRANCA 283X4.80MM', 770886, 2147483647, 2, '84.69', '169.38', 4, 4, 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `ordem_servicos`
 --
 
@@ -315,14 +345,20 @@ CREATE TABLE `ordem_servicos` (
 --
 
 INSERT INTO `ordem_servicos` (`id`, `data`, `clientes_id`, `mecanicos_id`, `servicos_id`, `mao_obra`, `obs`) VALUES
-(93, '2021-04-14 19:54:55', 2, 2, 1, '152.36', 'Todos'),
-(94, '2021-04-14 19:54:55', 2, 2, 2, '152.36', 'Todos'),
-(95, '2021-04-14 20:26:17', 1, 1, 2, '300.00', 'Tdos'),
-(96, '2021-04-14 20:26:17', 1, 1, 6, '300.00', 'Tdos'),
-(97, '2021-04-14 20:26:55', 4, 2, 6, '200.00', 'OOKK'),
-(98, '2021-04-14 20:26:55', 4, 2, 7, '200.00', 'OOKK'),
-(102, '2021-04-14 20:36:49', 1, 1, 3, '300.00', 'OOK'),
-(103, '2021-04-14 20:36:49', 1, 1, 7, '300.00', 'OOK');
+(127, '2021-04-15 15:16:21', 1, 2, 2, '100.00', 'todos'),
+(128, '2021-04-15 15:16:21', 1, 2, 4, '100.00', 'todos'),
+(129, '2021-04-15 15:18:22', 2, 3, 4, '250.00', ''),
+(130, '2021-04-15 15:18:22', 2, 3, 7, '250.00', ''),
+(131, '2021-04-15 17:35:25', 1, 1, 2, '152.36', ''),
+(132, '2021-04-15 17:47:26', 2, 2, 2, '253.00', '253253'),
+(133, '2021-04-15 17:47:26', 2, 2, 4, '253.00', '253253'),
+(134, '2021-04-15 17:55:27', 1, 1, 1, '233.33', 'ok'),
+(135, '2021-04-15 17:55:27', 1, 1, 7, '233.33', 'ok'),
+(136, '2021-04-15 19:35:35', 1, 2, 2, '139.00', ''),
+(137, '2021-04-15 19:35:35', 1, 2, 7, '139.00', ''),
+(138, '2021-04-15 19:36:33', 2, 1, 7, '200.00', '666'),
+(139, '2021-04-15 19:37:42', 4, 1, 2, '200.00', 'OK160'),
+(140, '2021-04-15 19:37:42', 4, 1, 3, '200.00', 'OK160');
 
 -- --------------------------------------------------------
 
@@ -1573,6 +1609,7 @@ CREATE TABLE `vendas` (
   `qtd` int(11) DEFAULT NULL,
   `valor_venda` decimal(10,2) DEFAULT NULL,
   `subtotal` decimal(10,2) DEFAULT NULL,
+  `forma_pagamento` varchar(100) DEFAULT NULL,
   `usuarios_id` int(11) NOT NULL,
   `clientes_id` int(11) NOT NULL,
   `mecanicos_id` int(11) NOT NULL,
@@ -1583,9 +1620,19 @@ CREATE TABLE `vendas` (
 -- Extraindo dados da tabela `vendas`
 --
 
-INSERT INTO `vendas` (`id`, `data`, `nome`, `codigo`, `barra`, `qtd`, `valor_venda`, `subtotal`, `usuarios_id`, `clientes_id`, `mecanicos_id`, `produtos_id`) VALUES
-(3, '2021-04-14 20:37:15', 'ABRACADEIRA NYLON BRANCA 283X4.80MM', 770886, 2147483647, 6, '84.69', '508.14', 7, 1, 1, 1),
-(4, '2021-04-14 20:37:21', 'ABRACADEIRA NYLON BRANCA 400X4.80MM', 770885, 2147483647, 7, '150.87', '1056.09', 7, 1, 1, 2);
+INSERT INTO `vendas` (`id`, `data`, `nome`, `codigo`, `barra`, `qtd`, `valor_venda`, `subtotal`, `forma_pagamento`, `usuarios_id`, `clientes_id`, `mecanicos_id`, `produtos_id`) VALUES
+(5, '2021-04-15 13:16:24', 'BALANCIM S10 2012 / 12625214 GM', 771556, 0, 2, '5.00', '10.00', NULL, 4, 1, 2, 151),
+(6, '2021-04-15 14:30:06', 'ABRACADEIRA NYLON BRANCA 283X4.80MM', 770886, 2147483647, 20, '84.69', '1693.80', NULL, 4, 1, 1, 1),
+(7, '2021-04-15 14:36:27', 'ABRACADEIRA NYLON BRANCA 283X4.80MM', 770886, 2147483647, 20, '84.69', '1693.80', NULL, 4, 1, 2, 1),
+(8, '2021-04-15 14:38:50', 'ABRACADEIRA NYLON BRANCA 283X4.80MM', 770886, 2147483647, 20, '84.69', '1693.80', NULL, 4, 2, 1, 1),
+(9, '2021-04-15 14:44:52', 'ABRACADEIRA NYLON BRANCA 283X4.80MM', 770886, 2147483647, 20, '84.69', '1693.80', NULL, 4, 2, 1, 1),
+(10, '2021-04-15 14:50:03', 'ABRACADEIRA NYLON BRANCA 283X4.80MM', 770886, 2147483647, 20, '84.69', '1693.80', NULL, 4, 4, 1, 1),
+(11, '2021-04-15 14:59:48', 'ABRACADEIRA NYLON BRANCA 283X4.80MM', 770886, 2147483647, 20, '84.69', '1693.80', NULL, 4, 1, 1, 1),
+(12, '2021-04-15 15:10:20', 'ABRACADEIRA NYLON BRANCA 283X4.80MM', 770886, 2147483647, 6, '84.69', '508.14', NULL, 4, 1, 2, 1),
+(13, '2021-04-15 15:17:02', 'ABRACADEIRA NYLON BRANCA 400X4.80MM', 770885, 2147483647, 2, '150.87', '301.74', NULL, 4, 1, 2, 2),
+(14, '2021-04-15 15:18:36', 'ABRACADEIRA NYLON BRANCA 283X4.80MM', 770886, 2147483647, 2, '84.69', '169.38', NULL, 4, 2, 3, 1),
+(15, '2021-04-15 17:39:18', 'ABRACADEIRA NYLON BRANCA 283X4.80MM', 770886, 2147483647, 1, '84.69', '84.69', NULL, 4, 1, 1, 1),
+(16, '2021-04-15 17:55:51', 'ABRACADEIRA NYLON BRANCA 283X4.80MM', 770886, 2147483647, 1, '84.69', '84.69', NULL, 4, 1, 1, 1);
 
 --
 -- Índices para tabelas despejadas
@@ -1655,6 +1702,16 @@ ALTER TABLE `marcas`
 --
 ALTER TABLE `mecanicos`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `orcamentos`
+--
+ALTER TABLE `orcamentos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_orcamentos_usuarios1_idx` (`usuarios_id`),
+  ADD KEY `fk_orcamentos_clientes1_idx` (`clientes_id`),
+  ADD KEY `fk_orcamentos_mecanicos1_idx` (`mecanicos_id`),
+  ADD KEY `fk_orcamentos_produtos1_idx` (`produtos_id`);
 
 --
 -- Índices para tabela `ordem_servicos`
@@ -1764,10 +1821,16 @@ ALTER TABLE `mecanicos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT de tabela `orcamentos`
+--
+ALTER TABLE `orcamentos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT de tabela `ordem_servicos`
 --
 ALTER TABLE `ordem_servicos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 
 --
 -- AUTO_INCREMENT de tabela `pedidos`
@@ -1797,7 +1860,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Restrições para despejos de tabelas
@@ -1837,6 +1900,15 @@ ALTER TABLE `estatisticas`
 --
 ALTER TABLE `galerias`
   ADD CONSTRAINT `fk_galerias_produtos1` FOREIGN KEY (`produtos_id`) REFERENCES `produtos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `orcamentos`
+--
+ALTER TABLE `orcamentos`
+  ADD CONSTRAINT `fk_orcamentos_clientes1` FOREIGN KEY (`clientes_id`) REFERENCES `clientes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_orcamentos_mecanicos1` FOREIGN KEY (`mecanicos_id`) REFERENCES `mecanicos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_orcamentos_produtos1` FOREIGN KEY (`produtos_id`) REFERENCES `produtos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_orcamentos_usuarios1` FOREIGN KEY (`usuarios_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `ordem_servicos`

@@ -6,7 +6,6 @@ use   \App\Entidy\Produto;
 use   \App\Entidy\Cliente;
 use   \App\Entidy\Mecanico;
 use   \App\Db\Pagination;
-use   \App\Entidy\Venda;
 use   \App\Session\Login;
 
 
@@ -74,18 +73,6 @@ if(isset($_SESSION['dados-venda'])){
     ';
 
 
-  $venda = New Venda;
-  $venda->nome             =  $produto;
-  $venda->codigo           =  $codigo_prod;
-  $venda->barra            =  $barra;
-  $venda->qtd              =  $qtd;
-  $venda->valor_venda      =  $uni;
-  $venda->subtotal         =  $sub;
-  $venda->usuarios_id      =  $usuario_id;
-  $venda->clientes_id      =  $cliente_id;
-  $venda->mecanicos_id     =  $mec_id;
-  $venda->produtos_id      =  $produtos_id;
-  $venda->cadastar();
 
   }
 
