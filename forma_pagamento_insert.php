@@ -25,10 +25,12 @@ $troco = 0;
 if(isset($_POST['valor_receber'],$_POST['form_pagamento'])){
   $_SESSION['forma-pagamento'] = array();
 
-    $form_pagamento   = $_POST['form_pagamento'];
-    $val_recebido     = $_POST['valor_receber'];
-    $total_absoluto   = $_POST['total_absoluto'];
-    $troco            = ($val_recebido - $total_absoluto);
+    $form_pagamento    = $_POST['form_pagamento'];
+    $val1              = $_POST['valor_receber'];
+    $val2              = str_replace(".", "", $val1);
+    $val_recebido      = str_replace(",", ".",  $val2);
+    $total_absoluto    = $_POST['total_absoluto'];
+    $troco             = ($val_recebido - $total_absoluto);
 
     array_push(
       $_SESSION['forma-pagamento'],

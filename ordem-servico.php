@@ -22,10 +22,10 @@ if (isset($_POST['clientes_id'])) {
         $valor_serv = $servicos->valor;
         
         $item = new Ordem;
-        
-        $obra      = $_POST['mao_obra'];
-        $cliente   = $_POST['clientes_id'];
-        $mecanico  = $_POST['mecanicos_id'];
+        $obra2          = $_POST['mao_obra'];
+        (float)$obra    =  str_replace(",",".",$obra2);
+        $cliente        = $_POST['clientes_id'];
+        $mecanico       = $_POST['mecanicos_id'];
       
         $item->clientes_id = $_POST['clientes_id'];    
         $item->mecanicos_id = $_POST['mecanicos_id'];    

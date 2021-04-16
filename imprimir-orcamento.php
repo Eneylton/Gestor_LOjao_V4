@@ -421,3 +421,13 @@ $total_geral = $total_serv + $total_prod + $mao_obra ;
 </body>
 
 </html>
+
+<?php
+
+unset($_SESSION['compras']);
+unset($_SESSION['carrinho']);
+unset($_SESSION['dados-venda']);
+unset($_SESSION['forma-pagamento']);
+unset($_SESSION['dados-serv']);
+
+?>

@@ -344,8 +344,7 @@ foreach ($_SESSION['carrinho'] as $id => $qtd) {
                   </div>
                   <div class="col-4">
                   <select class="form-control select2" name="mecanicos_id" required>
-                  <option selected="selected">Selecione</option>
-                          <option value="">Mecânico</option>
+                  <option value="">Selecione um Mecânico</option>
                           
 
                           <?= $result_mec; ?>

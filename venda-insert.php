@@ -23,27 +23,43 @@ $usuario_id = $usuariologado['id'];
 // CLIENTE // SERVIÇOS
 
 $total_absoluto = 0;
-
+$mensagem = "";
 if(isset($_SESSION['dados-serv'])){
-  foreach ($_SESSION['dados-serv'] as $item) {
+
+  if(empty($_SESSION['dados-serv'] )){
+    
+    $mensagem .="Selecione Serviço...";
+
+    header('location: pdv.php?status=success');
+    exit;
+
+
+  }else{
+
+    foreach ($_SESSION['dados-serv'] as $item) {
            
-           $cliente_id = $item['cliente'];
+      $cliente_id = $item['cliente'];
 
-           $buscar_cliente = Cliente:: getID($cliente_id);
-           
-           $cliente = $buscar_cliente->nome;
+      $buscar_cliente = Cliente:: getID($cliente_id);
+      
+      $cliente = $buscar_cliente->nome;
 
 
-           $mec_id = $item['mecanico'];
+      $mec_id = $item['mecanico'];
 
-           $buscar_mec = Mecanico:: getID($mec_id);
-           
-           $mecanico = $buscar_mec->nome;
+      $buscar_mec = Mecanico:: getID($mec_id);
+      
+      $mecanico = $buscar_mec->nome;
 
-           $obra     = $item['obra'];
-           $servicos = $item['servico'];
-           $total    = $item['total'];
+      $obra     = $item['obra'];
+      $servicos = $item['servico'];
+      $total    = $item['total'];
+}
+
   }
+
+
+ 
 
 }
 

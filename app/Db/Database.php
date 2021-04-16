@@ -9,7 +9,7 @@ class Database
 {
 
     const HOST = 'localhost';
-    const NAME = 'db_gestor2';
+    const NAME = 'db_gestor3';
     const USER = 'root';
     const PASS = '';
 
